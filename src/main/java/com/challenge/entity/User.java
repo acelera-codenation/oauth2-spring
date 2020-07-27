@@ -30,6 +30,7 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    public static final String ROLE_ADMIN = "ADMIN";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -70,7 +71,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("MANAGER"));
+        return Arrays.asList(new SimpleGrantedAuthority(ROLE_ADMIN));
     }
 
     @Override

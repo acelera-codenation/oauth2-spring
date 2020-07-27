@@ -16,6 +16,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService implements UserServiceInterface, UserDetailsService {
 
+    public static final String USER_NOT_FOUND = "User not found";
     private UserRepository userRepository;
 
     @Override
@@ -36,7 +37,7 @@ public class UserService implements UserServiceInterface, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(login)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
         return user;
     }
 }
